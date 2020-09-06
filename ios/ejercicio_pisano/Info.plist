@@ -37,6 +37,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Necesario para acceder a la galería y sacar fotos y videos para poder procesarlos.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Necesario para poder grabar sonido ambiente</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UILaunchStoryboardName</key>
