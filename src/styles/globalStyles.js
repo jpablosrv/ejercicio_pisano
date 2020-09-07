@@ -15,7 +15,8 @@ export default StyleSheet.create({
     alignSelf: 'center',
     width: '80%',
     height: 40,
-    margin: 20,
+    marginHorizontal: 20,
+    marginVertical: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -26,6 +27,12 @@ export default StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    alignSelf: 'center',
+    fontFamily: 'bold',
+    marginVertical: 10
+  },
+  subtitle: {
+    fontSize: 22,
     alignSelf: 'center',
     fontFamily: 'bold',
     marginVertical: 10
