@@ -6,7 +6,8 @@ const ImagesList = ({fotos, navigation}) => {
 
     const mostrarPreview = (uriImg) => {
         navigation.navigate('ImagePreview', {
-            uriImg
+            uriImg,
+            navigation
         });
     }
 
@@ -18,7 +19,7 @@ const ImagesList = ({fotos, navigation}) => {
             {fotos.map((item, index) => (
                 <TouchableOpacity 
                     key={index}
-                    onPress={() => mostrarPreview(item.uri)}
+                    onPress={() => mostrarPreview(item)}
                 >
                     <Image
                     style={styles.imageStyle}

@@ -2,13 +2,17 @@ import React, {useContext, useState} from 'react';
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import globalStyles from '../styles/globalStyles';
-import { Sepia, Grayscale, Invert, Cool } from 'react-native-color-matrix-image-filters';
+import { Sepia, Grayscale, Invert, Cool } from 'react-native-image-filter-kit';
+import { MainContext } from '../context/mainContext';
 
 const ImagenPreview = ({route}) => {
 
-    const { uriImg } = route.params;
+    const { uriImg, navigation } = route.params;
+
+    const { fotos, setFotos } = useContext(MainContext)
 
     const [efecto, setEffect] = useState(0);
+    const [fotoProcesada, setFotoProcesada] = useState(uriImg);
 
     const btnEffects = [
         {id: 0, text: 'Sin Efecto'},
@@ -20,45 +24,73 @@ const ImagenPreview = ({route}) => {
   
     return (
         <View style={{flex: 1, width: '100%'}}>
-            <ScrollView>
+            <ScrollView style={{flex: 1}}>
                 <Text style={globalStyles.title}>Foto a Editar:</Text>
                 {   efecto === 0 &&
                     <Image
                         style={styles.imageStyle}
-                        source={{uri: uriImg}}
+                        source={{uri: uriImg.uri}}
                     />
                 }
                 {   efecto === 1 &&
-                    <Grayscale>
-                        <Image
+                    <Grayscale 
+                        onExtractImage={({nativeEvent}) => {
+                            setFotoProcesada({id: uriImg.id,uri: nativeEvent.uri})
+                        }}
+                        extractImageEnabled={true}
+                        amount={1}
+                        image={
+                            <Image
                             style={styles.imageStyle}
-                            source={{uri: uriImg}}
+                            source={{uri: uriImg.uri}}
                         />
-                    </Grayscale>
+                        }
+                    />  
                 }
                 {   efecto === 2 &&
-                    <Sepia>
-                        <Image
+                    <Sepia 
+                        onExtractImage={({nativeEvent}) => {
+                            setFotoProcesada({id: uriImg.id,uri: nativeEvent.uri})
+                        }}
+                        extractImageEnabled={true}
+                        amount={1}
+                        image={
+                            <Image
                             style={styles.imageStyle}
-                            source={{uri: uriImg}}
+                            source={{uri: uriImg.uri}}
                         />
-                    </Sepia>
+                        }
+                    />  
                 }
                 {   efecto === 3 &&
-                    <Cool>
-                        <Image
+                    <Cool
+                        onExtractImage={({nativeEvent}) => {
+                            setFotoProcesada({id: uriImg.id,uri: nativeEvent.uri})
+                        }}
+                        extractImageEnabled={true}
+                        amount={1}
+                        image={
+                            <Image
                             style={styles.imageStyle}
-                            source={{uri: uriImg}}
+                            source={{uri: uriImg.uri}}
                         />
-                    </Cool>
+                        }
+                    />
                 }
                 {   efecto === 4 &&
-                    <Invert>
-                        <Image
+                    <Invert
+                        onExtractImage={({nativeEvent}) => {
+                            setFotoProcesada({id: uriImg.id,uri: nativeEvent.uri})
+                        }}
+                        extractImageEnabled={true}
+                        amount={1}
+                        image={
+                            <Image
                             style={styles.imageStyle}
-                            source={{uri: uriImg}}
+                            source={{uri: uriImg.uri}}
                         />
-                    </Invert>
+                        }
+                    />   
                 }
                 {
                     btnEffects.map((item) => (
@@ -67,6 +99,19 @@ const ImagenPreview = ({route}) => {
                         </TouchableOpacity>
                     ))
                 }
+
+                <TouchableOpacity 
+                    style={globalStyles.btnTouchable} 
+                    onPress={() => {
+                        const newFotos = fotos.map((item, index) =>{
+                            if(index !== uriImg.id) return item;
+                            return fotoProcesada;
+                        }) 
+                        setFotos(newFotos);
+                        navigation.goBack();
+                    }}>
+                    <Text style={globalStyles.txtBtnTouchable}>Guardar Foto</Text>
+                </TouchableOpacity>
             </ScrollView>
         </View>
     );

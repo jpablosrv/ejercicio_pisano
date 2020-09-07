@@ -27,7 +27,6 @@ const Camera = ({ capturaFotoHandler, capturaVideoHandler }) => {
       quality: 0.5, 
       base64: true,
       maxDuration: 30,
-      maxFileSize: 204800
     };
 
     try {
@@ -78,6 +77,7 @@ const Camera = ({ capturaFotoHandler, capturaVideoHandler }) => {
                 <Text style={{fontSize: 14}}> FOTO </Text>
               </TouchableOpacity>
               <TouchableOpacity
+                //onPressIn={() => takeVideo(camera)}
                 onPress={() => takeVideo(camera)}
                 style={styles.capture}>
                 <Text style={{fontSize: 14}}> VIDEO </Text>

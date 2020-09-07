@@ -12,20 +12,9 @@ const HomeScreen = ({navigation}) => {
 
     const {video, setVideo, fotos, setFotos} = useContext(MainContext)
 
-    const handlerFoto = () => {
-        navigation.navigate('ImagePreview');
-    }
     
-    const mostrarVideo = () => {
-        navigation.navigate('PlayVideo', {
-            video,
-            navigation,
-        });
-    }
-    
-
     const _capturaFotoHandler = (data) => {
-        setFotos([...fotos,{uri: data.uri}])
+        setFotos([...fotos,{uri: data.uri, id: fotos.length}])
     }
 
     const _capturaVideoHandler = (data) => {

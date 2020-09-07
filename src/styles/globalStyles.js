@@ -28,13 +28,13 @@ export default StyleSheet.create({
   title: {
     fontSize: 30,
     alignSelf: 'center',
-    fontFamily: 'bold',
+    fontWeight: 'bold',
     marginVertical: 10
   },
   subtitle: {
     fontSize: 22,
     alignSelf: 'center',
-    fontFamily: 'bold',
+    fontWeight: 'bold',
     marginVertical: 10
   }
 });
