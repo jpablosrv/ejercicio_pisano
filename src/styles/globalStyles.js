@@ -18,10 +18,16 @@ export default StyleSheet.create({
     margin: 20,
     justifyContent: 'center',
     alignItems: 'center',
-},
-txtBtnTouchable: {
+  },
+  txtBtnTouchable: {
     color: AppColors.colors.white,
     fontSize: 18,
     fontWeight: 'bold'
+  },
+  title: {
+    fontSize: 30,
+    alignSelf: 'center',
+    fontFamily: 'bold',
+    marginVertical: 10
   }
 });

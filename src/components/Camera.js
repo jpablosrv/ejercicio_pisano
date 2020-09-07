@@ -4,7 +4,7 @@ import {RNCamera} from 'react-native-camera';
 import PendingView from './PendingView';
 import { AppColors } from '../styles/AppStyles';
 
-const Camera = ({ capturaHandler }) => {
+const Camera = ({ capturaFotoHandler, capturaVideoHandler }) => {
   const [isRecording, setIsRecording] = useState(false);
   
   takePicture = async function(camera) {
@@ -12,9 +12,7 @@ const Camera = ({ capturaHandler }) => {
 
     const options = {quality: 0.5, base64: true};
     const data = await camera.takePictureAsync(options);
-    capturaHandler(data);
-    //  eslint-disable-next-line
-    console.log(data.uri);
+    capturaFotoHandler(data);
   };
 
   const takeVideo = async (camera) => {
@@ -32,7 +30,7 @@ const Camera = ({ capturaHandler }) => {
       if(promise) {
         setIsRecording(true);
         const data = await promise;
-        capturaHandler(data);
+        capturaVideoHandler(data);
         setIsRecording(false);
         console.warn('Video Guardado : ', data);
       }
@@ -40,11 +38,6 @@ const Camera = ({ capturaHandler }) => {
     } catch (error) {
       console.error(error)
     }
-    
-    // const data = await camera.takeVideo(options);
-    // capturaHandler(data);
-    // console.log(data.uri);
-
   }
 
   return (

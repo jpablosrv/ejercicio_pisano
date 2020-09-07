@@ -5,12 +5,13 @@ import Camera from '../components/Camera';
 import { ScrollView } from 'react-native-gesture-handler';
 import Video from 'react-native-video';
 import { MainContext } from '../context/mainContext';
+import ImagesList from '../components/ImagesList';
 
 
 
 const HomeScreen = ({navigation}) => {
 
-    const {video, setVideo} = useContext(MainContext)
+    const {video, setVideo, fotos, setFotos} = useContext(MainContext)
 
     const handlerFoto = () => {
         navigation.navigate('ImagePreview');
@@ -24,16 +25,25 @@ const HomeScreen = ({navigation}) => {
     }
     
 
-    const _capturaHandler = (data) => {
+    const _capturaFotoHandler = (data) => {
+        setFotos([...fotos,{uri: data.uri}])
+    }
+
+    const _capturaVideoHandler = (data) => {
         setVideo(data)
     }
+
 
     return (
         <ScrollView style={styles.container}>
             <Text>Home Screen Tincho </Text>
             <Camera 
-
-                capturaHandler={_capturaHandler}
+                capturaVideoHandler={_capturaVideoHandler}
+                capturaFotoHandler={_capturaFotoHandler}
+            />
+            <ImagesList
+                navigation={navigation}
+                fotos={fotos}
             />
             <TouchableOpacity 
                 onPress={handlerFoto}
