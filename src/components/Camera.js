@@ -11,8 +11,13 @@ const Camera = ({ capturaFotoHandler, capturaVideoHandler }) => {
     console.log({camera});
 
     const options = {quality: 0.5, base64: true};
-    const data = await camera.takePictureAsync(options);
-    capturaFotoHandler(data);
+    try {
+      const data = await camera.takePictureAsync(options);
+      capturaFotoHandler(data);
+    } catch (error) {
+      console.error(error)
+      console.log(error)
+    }
   };
 
   const takeVideo = async (camera) => {
